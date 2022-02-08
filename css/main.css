@@ -15,7 +15,7 @@ h2 {
   font-size: 4rem;
 }
 h3 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   /* line-height: 2rem; */
 }
 
@@ -32,6 +32,7 @@ a {
   /* padding: 40px; */
   padding: 2rem;
   padding-left: 6rem;
+  padding-right: 6rem;
   /* display: flex; */
   justify-content: left;
   align-items: left;
@@ -40,7 +41,7 @@ a {
   line-height: 4.5rem;
 }
 .small {
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 3rem;
 }
 .right {
@@ -52,6 +53,7 @@ a {
 
 #box0 {
   padding-left: 2rem;
+  padding-right: 2rem;
   /* padding: 40px; */
   display: flex;
   justify-content: center;
