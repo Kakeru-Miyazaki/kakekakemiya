@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>Tokyo TopoJSON</title>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/queue.v1.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<style>
+#map {
+  border:1px solid #999;
+  width:960px;
+  height:500px;
+}
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  font-size: 10px;
+}
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+
+    /* --------------------
+      変数定義
+    -------------------- */
+
+    var width  = 960,
+        height = 500;
+    var tip;
+
+    /* --------------------
+      描画のための準備
+    -------------------- */
+
+    /* 地図投影の指定 */
+    var projection = d3.geo.mercator()
+                    .scale(55000)
+                    .center([139.463191, 35.710335]);
+
+    /* 地形データをSVGに変換するための入れ物 */
+    var path = d3.geo.path()
+        .projection(projection);
+
+    /* 描画領域の指定 */
+    var svg = d3.select("#map").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    /* ツールチップ */        
+    tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .html(function(d) {
+        return d.properties.ward_ja;
+      });
+    svg.call(tip);
+
+
+    /* --------------------
+      データファイルの読み込み
+    -------------------- */
+
+    queue()
+        .defer(d3.json, "tokyo.topojson")
+        .await(loadReady);
+
+
+    /* --------------------
+      地図の描画
+    -------------------- */
+
+    function loadReady(_error, _topojson) {
+
+          if (_error){ console.log(_error); }
+
+          /* 描画用の変数定義 */
+          var geometries = topojson.feature(_topojson, _topojson.objects.tokyo).features;
+
+          /* 描画 */
+          var countries =  svg.append("g").selectAll(".ward").data(geometries);
+
+          countries
+              .enter().insert("path")
+                  .attr("class", "ward")
+                  .attr("d", path)
+                  .style("fill", "#999")
+                  .style("stroke", "#FFF")
+                  .style("stroke-width", "1px")
+              .on('mouseover', tip.show)
+              .on('mouseout', tip.hide);
+    }
+    
+</script>
+</body>
+</html>

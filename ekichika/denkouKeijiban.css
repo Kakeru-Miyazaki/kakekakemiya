@@ -1,0 +1,81 @@
+/* =====================
+	電光掲示板
+======================= */
+.ledText {
+  display: none;
+  width: 380px;
+  overflow: hidden;
+  position: absolute;
+  padding: 5px 0;
+  margin-top: 10px;
+  color: #ffb400;
+  font-size: 30px;
+  font-weight: bold;
+  background: #333333;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+/* CSS3グラデーションでドット感を出す */
+.ledText:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(#0a0600 1px, transparent 0px),
+    linear-gradient(0, #0a0600 1px, transparent 1px);
+  background-image: -webkit-linear-gradient(#0a0600 1px, transparent 0px),
+    -webkit-linear-gradient(0, #0a0600 1px, transparent 1px);
+  background-size: 2px 2px;
+  z-index: 10;
+}
+
+/* CSS3アニメーションでスクロール */
+.ledText span {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  -webkit-animation-name: marquee;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 7s;
+  -moz-animation-name: marquee;
+  -moz-animation-timing-function: linear;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-duration: 7s;
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 7s;
+}
+
+@-webkit-keyframes marquee {
+  from {
+    -webkit-transform: translate(0%);
+  }
+  99%,
+  to {
+    -webkit-transform: translate(-100%);
+  }
+}
+@-moz-keyframes marquee {
+  from {
+    -moz-transform: translate(0%);
+  }
+  99%,
+  to {
+    -moz-transform: translate(-100%);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translate(0%);
+  }
+  99%,
+  to {
+    transform: translate(-100%);
+  }
+}

@@ -1,0 +1,49 @@
+/* body {
+  margin: 0;
+  padding: 0;
+} */
+/* .css-fukidashi {
+  padding: 0;
+  margin: 0;
+} */
+/* .text {
+  width: 200px;
+  position: relative;
+  margin: 80px 50px 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+} */
+.fukidashi {
+  /* float: center; */
+  /* margin: 0 auto; */
+  display: none;
+  width: 265px;
+  position: absolute;
+  top: 5px;
+  left: 115px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #929ea391;
+  border-color: #929ea391;
+  color: #fff;
+  font-size: 15px;
+  /* font-weight: bold; */
+  padding-left: 1.5rem;
+}
+.fukidashi:after {
+  position: absolute;
+  /* width: 0;
+  height: 0;
+  left: 0;
+  bottom: 0px;z
+  margin-left: 10px;
+  border: solid transparent;
+  border-color: transparent;
+  border-top-color: #18181873;
+  border-width: 10px;
+  pointer-events: none;
+  content: " "; */
+}
+.input-container:hover + .fukidashi {
+  display: block;
+}

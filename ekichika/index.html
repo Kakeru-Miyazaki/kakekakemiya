@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>EKICHIKA</title>
+<style>
+  .html {
+    font-family: "Lora", serif;
+    font-family: "Ubuntu", sans-serif;
+  }
+
+  .body {
+    height: auto;
+    width: auto;
+  }
+
+  .background {
+    fill: black;
+    pointer-events: all;
+  }
+
+  #states {
+    fill: grey;
+  }
+
+  #state-borders {
+    fill: none;
+    stroke: black;
+    /* stroke-width: 1.5px; */
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    pointer-events: none;
+  }
+
+  .wave {
+    pointer-events: none;
+  }
+
+  .text {
+    pointer-events: none;
+  }
+
+
+  #title{
+    color: #fff;
+    position: absolute;
+    /* right: 410px; */
+    /* top: 30px; */
+    /* left: 180px;
+    top: 15px; */
+    bottom: 30px;
+    right: 50px;
+    font-size: 25px;
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="sidebar.css" />
+<link rel="stylesheet" href="button.css" />
+<link rel="stylesheet" href="form.css" />
+<link rel="stylesheet" href="clock.css" />
+<link rel="stylesheet" href="menu.css" />
+<link rel="stylesheet" href="search.css" />
+<link rel="stylesheet" href="modal.css" />
+<link rel="stylesheet" href="ekilist.css" />
+<link rel="stylesheet" href="goalStations.css" />
+<link rel="stylesheet" href="fukidashi.css" />
+<link rel="stylesheet" href="denkouKeijiban.css" />
+
+<body bgcolor="black">
+  <!-- >>> for sidebar >>> -->
+  <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" checked />
+  <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+  </label>
+  <div id="sidebarMenu">
+    <p class="ledText" id="ledText"><span id="keiziban" >駅を2つ以上選んでください</span></p>
+    <!-- <div class="wrapper"> -->
+    <!-- >>> for search >>> -->
+
+    <!-- <div class="cp_iptxt">
+        <input class="ef" type="text" placeholder="" id="inputEkiname" />
+        <label>Station Name</label>
+        <span class="focus_line"></span>
+      </div>
+
+      <a href="javascript:ekiSearch();" class="btn btn-svg" id="search">
+        <svg>
+          <rect x="2" y="2" rx="0" fill="none" width="200" height="50"></rect>
+        </svg>
+        <span>SEARCH</span>
+      </a>
+      <br /> -->
+
+    <!-- </div> -->
+    <!-- <<< for search <<< -->
+
+    <!-- >>> for menu >>> -->
+
+
+    <div class="container" id="container">
+      <div class="radio-tile-group">
+        <!-- <form name="formMenu"> -->
+          <div class="input-container">
+            <input id="one" class="radio-button" type="radio" name="radio" checked value="one"
+            onchange="onMenuChange()" />
+            <div class="radio-tile">
+              <div class="icon one-icon">
+                <img src="./fig/one_.png" width="30" height="30" />
+              </div>
+            </div>
+          </div>
+          <p class="fukidashi">ひとりでどこまでいけるかな</p>
+          
+          <div class="input-container">
+            <input id="meet" class="radio-button" type="radio" name="radio" value="meet" onchange="onMenuChange()" />
+            <div class="radio-tile">
+              <div class="icon meet-icon">
+                <img src="./fig/meet_.png" width="50" height="22" />
+              </div>
+            </div>
+          </div>
+          <p class="fukidashi">どこに集合しようかな</p>
+          
+          <div class="input-container">
+            <input id="meetWithTime" class="radio-button" type="radio" name="radio" value="meetWithTime"
+            onchange="onMenuChange()" />
+            <div class="radio-tile">
+              <div class="icon car-icon">
+                <img src="./fig/meetWithTime_.png" width="45" height="35" />
+              </div>
+            </div>
+          </div>
+          <p class="fukidashi">みんなでどこまでいけるかな</p>
+        <!-- </form> -->
+      </div>
+    </div>
+    <!-- <<< for menu <<< -->
+
+    <!-- >>> for clock >>> -->
+    <div class="wrapper">
+
+
+      <div id="clockAndTime">
+        <div class="clock" id="clock" draggable="true">
+          <div class="scale" id="scale"></div>
+          <div class="hour line"></div>
+          <div class="min line" draggable="true" id="minLine"></div>
+        </div>
+        <div id="setTime" class="wrapper"></div>
+        <br />
+      </div>
+
+      <a href="javascript:run();" class="btn btn-svg">
+        <svg>
+          <rect x="2" y="2" rx="0" fill="none" width="200" height="50"></rect>
+        </svg>
+        <span>RUN</span>
+      </a>
+    </div>
+    <!-- <<< for clock <<< -->
+    <!-- <br> -->
+    <div id="selectedEkilist">
+    </div>
+    <div id="goalStations">
+      <div id="goalGreen"><span class="border-radius green"></span><span id="goalGreenName" class="padleft">茗荷谷</span><br><span class="border-radius"></span><span id="goalGreenTime" class="padleft">25min</span></div>
+      <div id="goalPurple"><span class="border-radius purple"></span><span id="goalPurpleName" class="padleft">押上（東京スカイツリー前）</span><br><span class="border-radius"></span><span id="goalPurpleTime" class="padleft">30min</span></div>
+      <div id="goalOne"><span class="border-radius green"></span><span class="border-radius purple"></span><span id="goalOneName" class="padleft">押上（東京スカイツリー前）</span><br><span class="border-radius"></span><span class="border-radius"></span><span id="goalOneTime" class="padleft">30min</span></div>
+    </div>
+    <div id="open">
+      <img src="fig/help.png" width="40px" height="40px" />
+    </div>
+  </div>
+
+
+
+  <div id="mask" class="hidden"></div>
+  <section id="modal1" class="hidden modal">
+    <p>
+      <strong>使い方</strong><br />
+      1. スタートにしたい駅をクリックする．<br />
+      2. マウスを使って時計をセッティングする．<br />
+      3. RUNボタンを押す．<br />
+      <br />
+      設定した時間内にスタートから到達できる駅が表示されます．
+    </p>
+    <div id="close1" class="close">Close</div>
+  </section>
+  <section id="modal2" class="hidden modal">
+    <p>
+      <strong>使い方</strong><br />
+      1. 集合する複数人の最寄り駅をクリックする．<br />
+      2. RUNボタンを押す．<br />
+      <br />
+      最も早く集合できる駅が
+      <strong><span class="textGreen">黄緑色</div>
+      </strong>
+      で表示され，<br />集まりやすい大きな駅が
+      <strong>
+        <span class="textPuple">紫色</div>
+      </strong>
+      で表示されます．
+    </p>
+    <div id="close2" class="close">Close</div>
+  </section>
+  <section id="modal3" class="hidden modal">
+    <p>
+      <strong>使い方</strong><br />
+      1. それぞれの最寄駅をクリックする．<br />
+      2. マウスを使って時計をセッティングする．<br />
+      3. RUNボタンを押す．<br />
+      <br />
+      設定した時間以内に全員が行ける駅が
+      <span class="textLightBlue"><strong>薄青色</strong></span>
+      で表示されます．<br />
+    </p>
+    </p>
+    <div id="close3" class="close">Close</div>
+  </section>
+
+  <div class="search">
+    <input type="text" placeholder="Station Name" id="inputEkiname" />
+    <button onclick="ekiSearch()" id="search">
+      <img src="fig/search2.png" width="19px" height="19px" />
+    </button>
+  </div>
+  
+  <div id="title">EKICHIKA</div>
+
+  <!-- <<< for sidebar <<< -->
+  <script src="./d3.js" charset="utf-8"></script>
+  <script src="//d3js.org/topojson.v1.min.js"></script>
+  <script src="./search.js"></script>
+  <script src="./clock.js"></script>
+  <!--<script src="./tooltip.js"></script>-->
+  <script src="./menu.js"></script>
+  <script src="./ekilist.js"></script>
+  <script>
+    var w = window,
+      d = document,
+      e = d.documentElement,
+      BODY = d.getElementsByTagName("body")[0];
+    var width = w.innerWidth || e.clientWidth || BODY.clientWidth;
+    var height = w.innerHeight || e.clientHeight || BODY.clientHeight;
+
+    var userSetHour = 0;
+    var userSetTime = 30;
+    var stationQueue = [];
+    var ekiNameToEkiData = {};
+    var clicked_stations = new Set();
+    var clicked_stations_names = new Set();
+    var Greens = [];
+    var Purples = [];
+    var goal_station_name_ID = [];
+    var goal_station_time = [];
+
+    var mode = "one";
+
+    d3.select(window).on("resize", resizing);
+
+    var projection = d3
+      .geoMercator()
+      .scale(60000)
+      .center([139.38, 35.710335]) //[139.463191, 35.710335]
+      .translate([width / 2, height / 2]);
+
+    var path = d3.geoPath().projection(projection);
+
+    var zoom = d3
+      .zoom()
+      .scaleExtent([1, 200])
+      .on("zoom", function (event) {
+        g.selectAll("path").attr("transform", event.transform);
+        //駅
+        g.selectAll(".circle")
+          .attr("transform", event.transform)
+          .attr("r", function (d) {
+            return (1.35 * Math.sqrt(d.noriire)) / Math.cbrt(event.transform.k);
+          })
+          .attr("stroke-width", 0.4 / Math.cbrt(event.transform.k));
+        //波
+        g.selectAll(".wave")
+          .attr("transform", event.transform)
+          .attr("r", function (d) {
+            return 100 / Math.cbrt(event.transform.k);
+          })
+          .attr("stroke-width", 0.2 / Math.cbrt(event.transform.k));
+        //線
+        g.selectAll("line")
+          .attr("transform", event.transform)
+          .attr("stroke-width", 2 / Math.cbrt(event.transform.k));
+        //境界
+        g.selectAll("#state-borders").attr(
+          "stroke-width",
+          1.5 / Math.cbrt(event.transform.k)
+        );
+        //tooltip
+        resizeStationTooltip(event);
+        hideStationTooltipOnZoom(event);
+        //テキスト
+        if (event.transform.k > 6) {
+          g.selectAll("text")
+            .attr("transform", event.transform)
+            .attr("font-size", function (d) {
+              return (
+                (0.6 * Math.sqrt(d.noriire)) / Math.cbrt(event.transform.k)
+              );
+            })
+            .attr("dy", function (d) {
+              return (
+                (0.2 * Math.sqrt(d.noriire)) / Math.cbrt(event.transform.k)
+              );
+            })
+            .attr("opacity", (event.transform.k - 6) / 5);
+        } else {
+          g.selectAll("text").attr("opacity", 0);
+        }
+      });
+
+    var svg = d3
+      .select("body")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("x", 0)
+      .attr("y", 0);
+
+    var g = svg.append("g").call(zoom);
+
+    g.append("rect")
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height)
+      .on("click", reset_selections);
+    // .attr("stroke", "lightgrey")
+    // .attr("stroke-width", 20);
+
+    function reset_selections() {
+      g.selectAll(".wave").remove();
+      // g.selectAll(".wave_in").remove();
+      g.selectAll("circle").attr("fill-opacity", 0.2).attr("fill", "white");
+      g.selectAll("line")
+        .transition()
+        .duration(500)
+        .ease(d3.easeLinear)
+        .attr("opacity", 1);
+      clicked_stations.clear();
+      clicked_stations_names.clear();
+      last_center_station = NaN;
+      insertAllSelectedEkilist();
+    }
+
+    showMap().then(() => {
+      d3.csv("joinWithIdoKeido.csv")
+        .then(function (data) {
+          showline(data);
+        })
+        .then(() => {
+          d3.csv("data.csv").then(function (data) {
+            data.forEach(function (d) {
+              ekiNameToEkiData[d.name] = d;
+            });
+            showCircle(data);
+          });
+        });
+    });
+
+    function showMap() {
+      return new Promise((resolve) => {
+        d3.json("./tokyo.topojson")
+          .then(function (tk) {
+            var tokyo = topojson.feature(tk, tk.objects.tokyo);
+            g.append("g")
+              .attr("id", "states")
+              .selectAll("path")
+              .data(tokyo.features)
+              .enter()
+              .append("path")
+              .attr("d", path);
+            // .on("click", clicked);
+
+            g.append("path")
+              .datum(
+                topojson.mesh(tk, tk.objects.tokyo, function (a, b) {
+                  return a !== b;
+                })
+              )
+              .attr("id", "state-borders")
+              .attr("stroke-width", 1.5)
+              .attr("d", path);
+          })
+          .then(() => {
+            resolve(true);
+          });
+      });
+    }
+
+    function showline(data) {
+      function position(p) {
+        p.attr("x1", function (d) {
+          return projection([d.fromIdo, d.fromKeido])[0];
+        });
+        p.attr("y1", function (d) {
+          return projection([d.fromIdo, d.fromKeido])[1];
+        });
+        p.attr("x2", function (d) {
+          return projection([d.toIdo, d.toKeido])[0];
+        });
+        p.attr("y2", function (d) {
+          return projection([d.toIdo, d.toKeido])[1];
+        });
+        p.attr("stroke", function (d) {
+          return "rgb(" + d.r + "," + d.g + "," + d.b + ")";
+        });
+        p.attr("class", function (d) {
+          return (
+            "s" + d.fromID + "_" + d.toID + " " + "s" + d.toID + "_" + d.fromID
+          );
+        });
+      }
+      var links = g
+        .selectAll("line")
+        .data(data)
+        .enter()
+        .append("line")
+        .attr("stroke-width", 2)
+        .attr("class", function (d) {
+          return (
+            "s" + d.fromID + "_" + d.toID + " " + "s" + d.toID + "_" + d.fromID
+          );
+        })
+        .call(position);
+
+      links.append("title").text(function (d) {
+        return d.routeName;
+      });
+    }
+
+    function showCircle(data) {
+      function position(p) {
+        p.attr("cx", function (d) {
+          return projection([d.ido, d.keido])[0];
+        });
+        p.attr("cy", function (d) {
+          return projection([d.ido, d.keido])[1];
+        });
+        p.attr("r", function (d) {
+          return 1.35 * Math.sqrt(d.noriire);
+        });
+        p.attr("stroke-width", 0.4);
+        p.attr("id", function (d) {
+          return d.name + d.GroupID;
+        });
+      }
+
+      var circle = g
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .sort(order)
+        .attr("class", "circle")
+        .attr("fill", "white")
+        .attr("fill-opacity", 0.2)
+        .attr("stroke", "white")
+        .call(position);
+
+
+      // circle.on("mouseover", onMouseover).on("mouseout", onMouseout);
+      function order(a, b) {
+        return b.noriire - a.noriire;
+      }
+
+      circle.on("click", function (event, d) {
+        if (mode == "one") {
+          console.log(d);
+          if (clicked_stations_names.has(d.name + d.GroupID)){
+            clicked_stations.clear(); //空にする
+            clicked_stations_names.clear();
+            console.log(clicked_stations);
+            console.log(clicked_stations_names);
+            g.selectAll("circle")
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .attr("fill-opacity", 0.2)
+                .attr("fill", "white");
+            g.selectAll(".wave").remove();
+          } else {
+            clicked_stations.clear(); //空にする
+            clicked_stations_names.clear();
+            clicked_stations.add(d.GroupID);
+            clicked_stations_names.add(d.name + d.GroupID);
+
+            console.log(clicked_stations);
+            console.log(clicked_stations_names);
+            g.selectAll("circle")
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .attr("fill-opacity", 0.2)
+                .attr("fill", "white");
+            g.selectAll(".wave").remove();
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .attr("fill-opacity", 1)
+                .attr("fill", "red");
+
+            var circle_cx = d3.select(this).attr("cx");
+            var circle_cy = d3.select(this).attr("cy");
+            var circle_transform = d3.select(this).attr("transform");
+            var kakudairitu = 0.2 / d3.select(this).attr("stroke-width");
+            // 選択した駅から波動を発生させる
+            var wave = g
+                .append("circle")
+                .attr("class", "wave wave_out")
+                .attr("stroke", "white")
+                .attr("stroke-width", 0.2)
+                .attr("opacity", 1)
+                .attr("fill-opacity", 0)
+                .attr("cx", circle_cx)
+                .attr("cy", circle_cy)
+                .attr("r", 0)
+                .attr("transform", circle_transform);
+
+            wave
+                .append("animate")
+                .attr("class", "wave_out_animation")
+                .attr("attributeName", "r")
+                .attr("begin", "0s")
+                .attr("dur", "1s")
+                .attr("from", "0")
+                .attr("to", "25")
+                .attr("repeatCount", "indefinite");
+          }
+        } else {
+          console.log(d);
+        //   clicked_stations.add(d.GroupID);
+          if (clicked_stations_names.has(d.name + d.GroupID)){
+            clicked_stations_names.delete(d.name + d.GroupID)
+            console.log(clicked_stations_names);
+            if (Greens.length > 0 && Greens[0] == d.name + d.GroupID){
+                d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .ease(d3.easeLinear)
+                    .attr("fill-opacity", 1)
+                    .attr("fill", "lime");
+            } else if (Purples.length > 0 && Purples[0] == d.name + d.GroupID){
+                d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .ease(d3.easeLinear)
+                    .attr("fill-opacity", 1)
+                    .attr("fill", "darkviolet");
+            } else {
+                d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .ease(d3.easeLinear)
+                    .attr("fill-opacity", 0.2)
+                    .attr("fill", "white");
+            }
+            g.select(".wave_" + d.name).remove();
+          } else {
+            clicked_stations_names.add(d.name + d.GroupID);
+            // console.log(clicked_stations);
+            console.log(clicked_stations_names);
+            d3.select(this)
+                .transition()
+                .duration(500)
+                .ease(d3.easeLinear)
+                .attr("fill-opacity", 1)
+                .attr("fill", "red");
+
+            var circle_cx = d3.select(this).attr("cx");
+            var circle_cy = d3.select(this).attr("cy");
+            var circle_transform = d3.select(this).attr("transform");
+            var kakudairitu = 0.2 / d3.select(this).attr("stroke-width");
+            // 選択した駅から波動を発生させる
+            var wave = g
+                .append("circle")
+                .attr("class", "wave wave_out wave_" + d.name)
+                .attr("stroke", "white")
+                .attr("stroke-width", 0.2)
+                .attr("opacity", 1)
+                .attr("fill-opacity", 0)
+                .attr("cx", circle_cx)
+                .attr("cy", circle_cy)
+                .attr("r", 0)
+                .attr("transform", circle_transform);
+
+            wave
+                .append("animate")
+                .attr("class", "wave_out_animation")
+                .attr("attributeName", "r")
+                .attr("begin", "0s")
+                .attr("dur", "1s")
+                .attr("from", "0")
+                .attr("to", "25")
+                .attr("repeatCount", "indefinite");
+          }
+        }
+        insertAllSelectedEkilist();
+      });
+      circle.on("mouseover", tooltipHandlerOnCircle)
+                .on("mouseout", tooltipHandlerOnCircle);
+
+      var text = g
+        .selectAll("text")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("class", "text")
+        .attr("fill", "black")
+        .attr("text-anchor", "middle")
+        .attr("stroke", "none")
+        .attr("opacity", 0)
+        // .style("font-family","Ubuntu")
+        .call(textPosition);
+
+      function textPosition(p) {
+        p.attr("x", function (d) {
+          return projection([d.ido, d.keido])[0];
+        });
+        p.attr("y", function (d) {
+          return projection([d.ido, d.keido])[1];
+        });
+        p.text(function (d) {
+          return d.name;
+        });
+        p.attr("font-size", function (d) {
+          return 0.6 * Math.sqrt(d.noriire);
+        });
+        p.attr("dy", function (d) {
+          return 0.2 * Math.sqrt(d.noriire);
+        });
+      }
+    }
+
+    function resizing() {
+      w = window;
+      e = d.documentElement;
+      BODY = d.getElementsByTagName("body")[0];
+      width = w.innerWidth || e.clientWidth || BODY.clientWidth;
+      height = w.innerHeight || e.clientHeight || BODY.clientHeight;
+      svg.attr("width", width).attr("height", height);
+      svg.selectAll(".background").attr("width", width).attr("height", height);
+    }
+
+    // function openGoogleMap(d) {
+    //   window.open(
+    //     "https://www.google.co.jp/maps/search/%E3%83%AC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3+" +
+    //       d.name
+    //   );
+    // }
+
+    var isAleradySearched = false;
+    function ekiSearch() {
+      isAleradySearched = true;
+      var inputName = document.getElementById("inputEkiname").value;
+      if (inputName.slice(-1) == "駅") {
+        inputName = inputName.slice(0, -1);
+      }
+      console.log(inputName);
+      if (ekiNameToEkiData[inputName] == undefined) {
+        console.log(document.getElementById("inputEkiname").value.slice(0, 4));
+        // alert(inputName + "駅が見つかりません");
+        if (
+          document.getElementById("inputEkiname").value.slice(0, 3) != "Not"
+        ) {
+          document.getElementById("inputEkiname").value =
+            "Not Found : " + inputName;
+        }
+        return;
+      }
+      inputEkidata = ekiNameToEkiData[inputName];
+
+      console.log("#" + inputEkidata.name + inputEkidata.GroupID);
+      var kakudairitu =
+        0.2 /
+        d3
+          .select("#" + inputEkidata.name + inputEkidata.GroupID)
+          .attr("stroke-width");
+      console.log("#" + inputEkidata.name + inputEkidata.GroupID);
+      g.select("#" + inputEkidata.name + inputEkidata.GroupID)
+        .transition()
+        .duration(500)
+        .ease(d3.easeSin, d3.easeSinInOut)
+        .attr("r", function (d) {
+          console.log(d);
+          return (1.35 * Math.sqrt(d.noriire) * 5) / kakudairitu / 2;
+        })
+        .transition()
+        .ease(d3.easeSin, d3.easeSinInOut)
+        .attr("r", function (d) {
+          return (1.35 * Math.sqrt(d.noriire)) / kakudairitu / 2;
+        })
+        .transition()
+        .duration(500)
+        .ease(d3.easeSin, d3.easeSinInOut)
+        .attr("r", function (d) {
+          console.log(d);
+          return (1.35 * Math.sqrt(d.noriire) * 4) / kakudairitu / 2;
+        })
+        .transition()
+        .ease(d3.easeSin, d3.easeSinInOut)
+        .attr("r", function (d) {
+          return (1.35 * Math.sqrt(d.noriire)) / kakudairitu / 2;
+        })
+        .transition()
+        .duration(500)
+        .ease(d3.easeSin, d3.easeSinInOut)
+        .attr("r", function (d) {
+          console.log(d);
+          return (1.35 * Math.sqrt(d.noriire) * 3) / kakudairitu / 2;
+        })
+        .transition()
+        .ease(d3.easeSin, d3.easeSinInOut)
+        .attr("r", function (d) {
+          return (1.35 * Math.sqrt(d.noriire)) / kakudairitu / 2;
+        });
+    }
+
+    function clearForm() {
+      console.log(document.getElementById("inputEkiname").composing);
+      if (isAleradySearched) {
+        document.getElementById("inputEkiname").value = "";
+        isAleradySearched = false;
+      }
+      return;
+    }
+
+    function run() {
+      if (mode == "one") {
+        single_person();
+      } else if (mode == "meet") {
+        multi_person();
+      } else if (mode == "meetWithTime") {
+        multi_person_within_time();
+      }
+    }
+
+    document.getElementById("inputEkiname").addEventListener("keydown", (e) => {
+      if (e.keyCode == 13) {
+        ekiSearch();
+      }
+      if (e.keyCode == 229) {
+        clearForm();
+      }
+    });
+    
+    document.getElementById("inputEkiname").addEventListener("keydown", (e) => {
+      if (e.keyCode == 13) {
+        ekiSearch();
+      }
+      if (e.keyCode == 229) {
+        clearForm();
+      }
+    });
+
+    document.getElementById('container').addEventListener('mouseover', function(){
+      document.getElementById("ledText").style.display = "none";
+});
+    BODY.addEventListener('click', function(){
+      document.getElementById("ledText").style.display = "none";
+});
+    
+  </script>
+
+
+
+
+
+  <script src="./single_person.js"></script>
+  <script src="./multi_person.js"></script>
+  <script src="./multi_person_within_time.js"></script>
+  <script src="./modal.js"></script>
+  <script src="./tooltip.js"></script>
+</body>
