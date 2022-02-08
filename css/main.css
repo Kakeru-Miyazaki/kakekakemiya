@@ -16,7 +16,7 @@ h2 {
 }
 h3 {
   font-size: 3rem;
-  line-height: 2rem;
+  /* line-height: 2rem; */
 }
 
 span {
