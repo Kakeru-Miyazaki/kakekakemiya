@@ -2,6 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap");
 /*========= レイアウトのためのCSS ===============*/
 
+html {
+  height: auto;
+  width: auto;
+}
+
 body {
   font-family: "Lora", serif;
   font-family: "Ubuntu", sans-serif;
@@ -9,7 +14,7 @@ body {
 
 h1 {
   font-size: 6rem;
-  line-height: 12rem;
+  line-height: 10rem;
 }
 
 h2 {
@@ -174,11 +179,11 @@ a {
 }
 
 /*768px以下は現在地表示のテキストを非表示*/
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .pagination a .hover-text {
     display: none;
   }
-}
+} */
 
 /* 画面外にいる状態 */
 .fadein {
