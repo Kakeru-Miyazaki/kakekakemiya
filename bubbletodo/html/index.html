@@ -40,16 +40,12 @@
       <div id="close2" class="close" onclick="registerChildren()">Register</div>
     </section>
 
-
-
-
     <div id="colorTheme">
       <img src="../fig/blue.svg" width="25" height="25" id="blue" onclick="setColor(this.id)"></src>
       <img src="../fig/darkblue.svg" width="25" height="25" id="darkblue" onclick="setColor(this.id)"></src>
       <img src="../fig/green.svg" width="25" height="25" id="green" onclick="setColor(this.id)"></src>
       <img src="../fig/darkgreen.svg" width="25" height="25" id="darkgreen" onclick="setColor(this.id)"></src>
       <img src="../fig/yellow.svg" width="25" height="25" id="yellow" onclick="setColor(this.id)"></src>
-      <!-- <br> -->
       <img src="../fig/pink.svg" width="25" height="25" id="pink" onclick="setColor(this.id)"></src>
       <img src="../fig/red.svg" width="25" height="25" id="red" onclick="setColor(this.id)"></src>
       <img src="../fig/darkred.svg" width="25" height="25" id="darkred" onclick="setColor(this.id)"></src>
@@ -258,8 +254,6 @@
       document.body.bgColor = colorlist[colortheme]["bg"]; 
       document.getElementsByClassName("modal")[0].style.background = colorlist[colortheme]["modal"];
       document.getElementsByClassName("modal")[1].style.background = colorlist[colortheme]["modal"];
-      // localStorage.clear();
-      // localStorage.clear();
       var tutorial_ = [
         {
           name: "Sample",
@@ -311,7 +305,6 @@
           id: parent.name,
           text: parent.name,
           r: 90 + 25 * Math.round(lenChildren[parent.name] / 3 + 1.5),
-          // r: Math.max(30 * lenChildren[parent.name] + 65, 120),
           x: width * (Math.random() * 0.6 + 0.2),
           y: height * (Math.random() * 0.6 + 0.2),
         });
@@ -347,7 +340,6 @@
               25 *
                 ((c_index % Math.round((lenChildren[parent.name] + 1) / 3)) +
                   1),
-            // l: 20 * lenChildren[parent.name] * (0.3 + 0.7 * Math.random()),
           });
           c_index++;
         }
@@ -445,6 +437,13 @@
             return 15;
           }
         })
+        .call(
+          d3
+            .drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended)
+        )
         .on("click", function (d) {
           if (d.parent_name != null) {
             if (d.url != null) {
@@ -475,6 +474,13 @@
             return 20;
           }
         })
+        .call(
+          d3
+            .drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended)
+        )
         .on("click", function (d) {
           deleteBubble(d);
         })
@@ -490,23 +496,6 @@
         })
         .attr("opacity", 0.4)
         .attr("text-anchor", "middle");
-
-      // var delbutton = node
-      //   .selectAll(".node_group")
-      //   .append("circle")
-      //   .attr("r", 10)
-      //   .on("click", function (d) {
-      //     if (d.url != null) {
-      //       window.open(d.url, "_blank").focus();
-      //     }
-      //   })
-      //   .attr("fill", "yellow")
-      //   .attr("x", function (d) {
-      //     return d.x + 10;
-      //   })
-      //   .attr("y", function (d) {
-      //     return d.y - 10;
-      //   });
 
       var simulation = d3
         .forceSimulation()
@@ -531,13 +520,6 @@
               return d.r;
             })
             .strength(0.0)
-            // .strength(function (d) {
-            //   if (d.parent_name == null) {
-            //     return 0;
-            //   } else {
-            //     return 0.7;
-            //   }
-            // })
             .iterations(16)
         )
         .force("charge", d3.forceManyBody().strength(-200))
@@ -735,7 +717,6 @@
         sessionStorage.removeItem("futureStack");
 
         var newDataSet = dataSet;
-        // newDataSet.push({ name: new_parent_name, children: [] });
 
         for (parent of newDataSet) {
           if (parent.name == pname) {
