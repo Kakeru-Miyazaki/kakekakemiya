@@ -26,7 +26,10 @@
     </section>
     <section id="modal2" class="hidden modal">
       <p>
-        <div id="parentnameOnInput"><strong></strong></div> 
+        <div ><strong id="parentnameOnInput"></strong>
+          <span>
+            <img src="../fig/edit.svg" width="20" height="20" onclick="editName()"></src>
+          </span></div> 
         <br />
         Name
         <input type="text" id="inputChildrenName" />
@@ -38,6 +41,16 @@
         <br />
       </p>
       <div id="close2" class="close" onclick="registerChildren()">Register</div>
+    </section>
+    <section id="modal3" class="hidden modal">
+      <p>
+        <span
+          ><span><span id="newSectionName">New Section Name</span></span></span
+        >
+        <input type="text" id="inputNewName" />
+        <br />
+      </p>
+      <div id="close3" class="close" onclick="registerNewName()">Register</div>
     </section>
 
     <div id="colorTheme">
@@ -85,6 +98,7 @@
       var pname = "";
       if (Sample_set) {
         localStorage.clear();
+        sessionStorage.clear();
         var dataSet_ = [
           {
             name: "Python",
@@ -254,6 +268,7 @@
       document.body.bgColor = colorlist[colortheme]["bg"]; 
       document.getElementsByClassName("modal")[0].style.background = colorlist[colortheme]["modal"];
       document.getElementsByClassName("modal")[1].style.background = colorlist[colortheme]["modal"];
+      document.getElementsByClassName("modal")[2].style.background = colorlist[colortheme]["modal"];
       var tutorial_ = [
         {
           name: "Sample",
@@ -605,7 +620,6 @@
 
       // 6. クリック時のイベント
       function deleteBubble(d) {
-
         pastStack.push(dataSet);
         var pastStack_ = JSON.stringify(pastStack, undefined, 1);
         sessionStorage.setItem("pastStack", pastStack_);
@@ -736,6 +750,62 @@
         windowReload();
       }
 
+      function editName(){
+        // pname is parent name
+        document.getElementById("newSectionName").innerHTML =
+          "Rename \"" + pname + " \"";
+        document.getElementById("inputNewName").value = "";
+        document.getElementById("modal2").style.display = "none";
+        document.getElementById("mask").style.display = "block";
+        document.getElementById("modal3").style.display = "block";
+      }
+
+
+
+      function registerNewName(){
+        var new_parent_name = document.getElementById("inputNewName").value;
+
+        console.log(new_parent_name);
+        if (new_parent_name == "") {
+          document.getElementById("inputNewName").value = "Empty input";
+          return 1;
+        }
+        if (parentNameSet.has(new_parent_name)) {
+          document.getElementById("inputNewName").value = "Already exists";
+          return 1;
+        }
+        if (
+          new_parent_name == "Empty input" ||
+          new_parent_name == "Already exists"
+        ) {
+          return 1;
+        }
+
+        document.getElementById("mask").style.display = "none";
+        document.getElementById("modal3").style.display = "none";
+
+        pastStack.push(dataSet);
+        var pastStack_ = JSON.stringify(pastStack, undefined, 1);
+        sessionStorage.setItem("pastStack", pastStack_);
+        console.log(dataSet);
+        sessionStorage.removeItem("futureStack");
+
+        var newDataSet = [];
+        for (parent of dataSet){
+          console.log(parent)
+          if (parent.name == pname){
+            parent.name = new_parent_name;
+            newDataSet.push(parent);
+          } else {
+            newDataSet.push(parent);
+          }
+        }
+        var newDataSet_ = JSON.stringify(newDataSet, undefined, 1);
+        localStorage.setItem("data_set", newDataSet_);
+        windowReload();
+      }
+
+
       function setColor(colorname){
         localStorage.setItem("colortheme",colorname);
         windowReload();
@@ -786,6 +856,7 @@
         document.getElementById("mask").style.display = "none";
         document.getElementById("modal1").style.display = "none";
         document.getElementById("modal2").style.display = "none";
+        document.getElementById("modal3").style.display = "none";
       }
 
     </script>
