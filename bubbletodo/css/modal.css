@@ -92,3 +92,7 @@ input {
 #urlbuf {
   padding-left: 1rem;
 }
+
+#editIcon {
+  margin-left: 0.2rem;
+}
