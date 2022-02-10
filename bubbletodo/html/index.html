@@ -75,6 +75,7 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="../js/stack.js"></script>
     <script>
+      // Sample_set is hard reset for debug
       var Sample_set = false;
 
       var w = window,
@@ -90,7 +91,6 @@
         .attr("width", width)
         .attr("height", height);
 
-      // 1. 描画用のデータ準備
       var width = document.querySelector("svg").clientWidth;
       var height = document.querySelector("svg").clientHeight;
       var nodesData = [];
@@ -99,9 +99,10 @@
       var parentNameSet = new Set();
       var childrenNameSet = new Set();
       var pname = "";
+
       if (Sample_set) {
-        localStorage.clear();
-        sessionStorage.clear();
+      localStorage.clear();
+      sessionStorage.clear();
         var dataSet_ = [
           {
             name: "Python",
@@ -185,6 +186,8 @@
         var dataJson = JSON.stringify(dataSet_, undefined, 1);
         localStorage.setItem("data_set", dataJson);
       }
+
+      // color theme list
       var colorlist = {
         blue:{
           bg:"lightblue",
@@ -266,12 +269,17 @@
       if (!localStorage.hasOwnProperty("colortheme")) {
         localStorage.setItem("colortheme", "blue");
       }
+
+
       var colortheme = localStorage.getItem("colortheme");
       console.log(colortheme);
       document.body.bgColor = colorlist[colortheme]["bg"]; 
       document.getElementsByClassName("modal")[0].style.background = colorlist[colortheme]["modal"];
       document.getElementsByClassName("modal")[1].style.background = colorlist[colortheme]["modal"];
       document.getElementsByClassName("modal")[2].style.background = colorlist[colortheme]["modal"];
+      
+      // sample for first visitor
+      // it has the usage and link
       var tutorial_ = [
         {
           name: "Sample",
@@ -299,9 +307,10 @@
         {
           name: "about",
           children: [
-            { name: "Author:kakekakemiya" },
+            { name: "Author:kakekakemiya",url:"https://kakeru-miyazaki.github.io/kakekakemiya/#Top" },
             { name: "GitHub",url:"https://github.com/Kakeru-Miyazaki" },
             { name: "Qiita",url:"https://qiita.com/kakekakemiya" },
+            { name: "Source Code",url:"https://github.com/Kakeru-Miyazaki/todobubble" },
           ],
         },
       ];
@@ -310,8 +319,11 @@
         localStorage.setItem("data_set", dataJson);
       }
 
+
+      // read the data and set it to dataSet
+      // and reading it, create the data for d3.js (visualize)
+      //   -> nodesData, linksData
       var dataSet = JSON.parse(localStorage.getItem("data_set"));
-      // dataSet = JSON.parse(dataJson);
       var lenChildren = {};
       var max_lenchildren = 0;
       for (parent of dataSet) {
@@ -353,6 +365,7 @@
           linksData.push({
             source: parent.name,
             target: parent.name + children.name,
+            // this l goes better than random
             l:
               60 +
               25 *
@@ -363,8 +376,7 @@
         }
       }
 
-      // 2. svg要素を配置
-      // 背景
+      // Background (very large rect)
       svg
         .append("rect")
         .attr("width", "100%")
@@ -555,7 +567,6 @@
             .strength(0.03)
             .y(height / 2)
         );
-      // .force("center", d3.forceCenter(width / 2, height / 2))
       simulation.nodes(nodesData).on("tick", ticked);
 
       simulation
@@ -565,7 +576,7 @@
           return d.name;
         });
 
-      // 4. forceSimulation 描画更新用関数
+      // settings for drawing update
       function ticked() {
         link
           .attr("x1", function (d) {
@@ -603,7 +614,7 @@
           });
       }
 
-      // 5. ドラッグ時のイベント関数
+      // drag events
       function dragstarted(d) {
         if (!d3.event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
@@ -621,7 +632,7 @@
         d.fy = null;
       }
 
-      // 6. クリック時のイベント
+      // click events
       function deleteBubble(d) {
         pastStack.push(dataSet);
         var pastStack_ = JSON.stringify(pastStack, undefined, 1);
@@ -702,17 +713,18 @@
         windowReload();
       }
 
-      // pname is global val of parent name
       function registerChildren() {
         var new_children_name =
-          document.getElementById("inputChildrenName").value;
+        document.getElementById("inputChildrenName").value;
         var new_children_url = document.getElementById("inputURL").value;
-
+        
         console.log(new_children_name);
         if (new_children_name == "") {
           document.getElementById("inputChildrenName").value = "Empty input";
           return 1;
         }
+        // TAKE CARE : pname is global val of parent name
+        // value was set at function appendChildrenBubble
         if (childrenNameSet.has(pname + new_children_name)) {
           document.getElementById("inputChildrenName").value = "Already exists";
           return 1;
@@ -855,6 +867,7 @@
         window.location.href = window.location.href;
       }
 
+      // cancel for modal select
       function exit() {
         document.getElementById("mask").style.display = "none";
         document.getElementById("modal1").style.display = "none";
