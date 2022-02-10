@@ -40,8 +40,8 @@ a {
   padding-left: 6rem;
   padding-right: 6rem;
   /* display: flex; */
-  /* justify-content: left; */
-  /* align-items: left; */
+  justify-content: left;
+  align-items: left;
   text-align: left;
   font-size: 2.5rem;
   line-height: 4.5rem;
@@ -61,13 +61,13 @@ a {
   padding-left: 2rem;
   padding-right: 2rem;
   /* padding: 40px; */
-  /* display: flex; */
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: left;
-  background: rgb(25, 176, 176);
-  color: rgb(4, 32, 32);
-  text-align: center;
+  background: rgb(1, 118, 134);
+  color: #fff;
+  /* text-align: center; */
 }
 
 #box1 h2 {
@@ -271,42 +271,4 @@ a.btn-border-shadow--color2:before {
   border-radius: 100vh;
   -webkit-box-shadow: 3px 3px 0 #fffffff8;
   box-shadow: 3px 3px 0 #ffffff00;
-}
-
-/* icons */
-
-#icon01 {
-  position: relative;
-  /* bottom: 500px; */
-  /* left: 200px; */
-  float: left;
-  margin-left: 100px;
-  margin-bottom: 150px;
-}
-
-#icon02 {
-  /* position: absolute; */
-  /* text-align: right; */
-  position: relative;
-  float: right;
-  /* margin-left: auto; */
-  /* right: 200px; */
-  bottom: 250px;
-  margin-top: 4rem;
-  padding-bottom: 2rem;
-}
-
-#icon03 {
-  position: relative;
-  float: right;
-}
-#icon04 {
-  position: relative;
-  float: right;
-  padding-right: 100px;
-}
-
-#iconBox {
-  background-color: #fff;
-  width: auto;
 }
