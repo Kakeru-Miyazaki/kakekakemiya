@@ -36,7 +36,10 @@ https://kakeru-miyazaki.github.io/kakekakemiya/bubbletodo/html/index.html
 
 ## 機能と使い方
 
-![demo.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1322113/9f2ee807-6ea3-bea5-78f8-f826e46560e1.gif)
+![demo.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1322113/61c4b9dd-4430-8cc2-194e-d07b1cab96d8.gif)
+
+
+<!-- ![demo.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1322113/9f2ee807-6ea3-bea5-78f8-f826e46560e1.gif) -->
 
 
 
