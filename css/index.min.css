@@ -1,0 +1,1 @@
+#home{position:relative;height:50vh;width:100%;pointer-events:none}#child{font-size:1.4rem;pointer-events:all;position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}#child h1{line-height:5rem}

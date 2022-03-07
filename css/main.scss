@@ -1,34 +1,42 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka&family=Lora&family=Shippori+Mincho&family=Ubuntu:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fredoka&family=Kosugi+Maru&family=Lora&family=Shippori+Mincho&family=Ubuntu:wght@300&display=swap");
+$bg_color: rgb(181, 238, 247);
+$main_color: rgb(7, 15, 85);
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Lora&family=Shippori+Mincho&family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&family=Kosugi+Maru&family=Lora&family=Shippori+Mincho&family=Ubuntu:wght@300&display=swap');
+
 nav {
   width: 100%;
   height: 5rem;
   background-color: rgba(30, 99, 163, 0.363);
   padding-top: 0.3rem;
   box-sizing: border-box;
+
+  // .header_name {
+  //   display: flex;
+  //   float: left;
+  //   padding-top: 0.55rem;
+  //   margin-left: 35px;
+  //   font-size: 1.8rem;
+  // }
   position: fixed;
   top: 0;
   left: 0;
-}
-
-nav ul {
-  display: flex;
-  float: right;
-}
-
-nav li {
-  list-style: none;
-}
-
-nav a {
-  display: block;
-  text-decoration: none;
-  color: #070f55;
-  margin-right: 35px;
-}
-
-nav a:hover {
-  color: #0b75a7;
+  ul {
+    display: flex;
+    float: right;
+  }
+  li {
+    list-style: none;
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    color: $main_color;
+    margin-right: 35px;
+  }
+  a:hover {
+    color: rgb(11, 117, 167);
+  }
 }
 
 span {
@@ -40,22 +48,25 @@ body {
   font-family: 'Lora', serif;
   font-family: 'Shippori Mincho', serif;
   font-family: 'Ubuntu', sans-serif;
+
   font-family: 'Kosugi Maru', sans-serif;
   font-family: 'Fredoka', sans-serif;
   font-family: 'Lora', serif;
   font-family: 'Shippori Mincho', serif;
   font-family: 'Ubuntu', sans-serif;
-  background: #b5eef7;
+
+  background: $bg_color;
   padding-left: 3rem;
   padding-right: 3rem;
   padding-bottom: 7rem;
-  font-size: 1.2rem;
-  color: #070f55;
-  line-height: 2.2rem;
-}
 
-body span {
-  padding-right: 0.1em;
+  font-size: 1.2rem;
+  color: $main_color;
+  span {
+    padding-right: 0.1em;
+  }
+
+  line-height: 2.2rem;
 }
 
 .TOP {
@@ -79,6 +90,7 @@ h2 {
 }
 
 /* button */
+$buttonColor: rgb(7, 56, 112);
 *,
 *:before,
 *:after {
@@ -109,12 +121,13 @@ button.btn {
   vertical-align: middle;
   text-decoration: none;
   letter-spacing: 0.1em;
-  color: #073870;
+  color: $buttonColor;
   border-radius: 0.5rem;
 }
 
 a.btn-border-shadow {
   padding: calc(1.5rem - 12px) 3rem 1.5rem;
+
   background: rgba(255, 255, 255, 0);
 }
 
@@ -122,12 +135,15 @@ a.btn-border-shadow:before {
   position: absolute;
   top: -6px;
   left: -6px;
+
   width: 100%;
   height: 100%;
+
   content: '';
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  border: 3px solid #073870;
+
+  border: 3px solid $buttonColor;
   border-radius: 0.5rem;
 }
 
@@ -146,7 +162,7 @@ a.btn-border-shadow--color2 {
 
 a.btn-border-shadow--color2:before {
   border-radius: 100vh;
-  -webkit-box-shadow: 3px 3px 0 #073870;
+  -webkit-box-shadow: 3px 3px 0 $buttonColor;
   box-shadow: 3px 3px 0 #ffffff00;
 }
 

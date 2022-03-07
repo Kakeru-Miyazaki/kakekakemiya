@@ -1,0 +1,23 @@
+#home {
+  //   text-align: center;
+  position: relative;
+  //   background: rgba(255, 166, 0, 0.267);
+  height: 50vh;
+  width: 100%;
+  pointer-events: none;
+}
+
+#child {
+  h1 {
+    line-height: 5rem;
+  }
+  font-size: 1.4rem;
+  pointer-events: all;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}

@@ -1,245 +1,44 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <title>kakekakemiyaの作品集</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
-    <link rel="stylesheet" type="text/css" href="./css/main.css" />
-    <!-- <link
-      rel="stylesheet"
-      type="text/css"
-      href="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/6-1/css/6-1.css"
-    /> -->
-  </head>
+    <head>
+        <meta charset="utf-8" />
+        <title>kakekakemiya's Page</title>
+        <link rel="stylesheet" type="text/css" href="./css/main.css" />
+        <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    </head>
 
-  <body>
-    <main>
-      <section id="box0" class="box" data-section-name="Top">
-        <h1>kakekakemiyaの作品集</h1>
-      </section>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="./index.html">HOME</a></li>
+                <li><a href="./html/works.html">Works</a></li>
+                <li><a href="./html/about.html">About</a></li>
+                <li><a href="./html/contact.html">Contact</a></li>
+            </ul>
+        </nav>
 
-      <section id="box1" class="box" data-section-name="About">
-        <div class="fadein">
-          <h2>About kakekakemiya</h2>
-          <!-- <span>活動名</span><span>kakekakemiya</span> -->
-          <!-- <br /> -->
-          <div>
-            <span>名前</span>
-            :
-            <span>宮崎翔</span><span>Kakeru Miyazaki</span>
-            <br />
-            <span>所属</span>
-            :
-            <span>東京大学工学部電子情報工学科3年</span><span>(eeic2021)</span>
-          </div>
-        </div>
-        <br />
-        <div class="fadein">
-          <a href="https://github.com/Kakeru-Miyazaki" target="_black"
-            >kakekakemiya's <strong>GitHub</strong></a
-          >
-          <br />
-          <a href="https://qiita.com/kakekakemiya" target="_black"
-            >kakekakemiya's <strong>Qiita</strong></a
-          >
-        </div>
-        <br />
-        <div class="fadein">
-          <span>よく使う言語</span>
-          :
-          <span>C, C++, Python, shell script, JavaScript,CSS, HTML</span>
-          <br />
-          <span>少し触れた程度の言語</span>
-          :
-          <span>Go,Perl,Swift,Sass,Verilog</span>
-        </div>
-      </section>
+        <div id="home" onclick="NULL">
+            <div id="child">
+                <h1>kakekakemiya's Page</h1>
 
-      <section id="box2" class="box" data-section-name="Apps">
-        <div class="fadein">
-          <h2>自作アプリ</h2>
-          <h3>
-            <strong>
-              <span>AUTOZOOM</span
-              ><span><small>（HTML,CSS,JS with Electron） </small></span>
-            </strong>
-          </h3>
-        </div>
-        <div class="fadein">
-          <div class="right">
-            <div class="small">
-              時間と曜日に応じて入らなければならないZOOMミーティングに自動で入れてくれるアプリです．
-              <br />
-              毎日オンライン授業を受ける中で，URLの管理が面倒くさいと感じて作成しました．
-            </div>
-            <div class="center">
-              <span
-                ><a
-                  href="https://github.com/Kakeru-Miyazaki/autozoom3"
-                  target="_blank"
-                  class="btn btn-border-shadow btn-border-shadow--color2"
-                  >GitHub</a
-                ></span
-              >
-              <span></span>
-              <span></span>
-              <span
-                ><a
-                  href="https://qiita.com/kakekakemiya/items/7dacebf509a07dd6eb97"
-                  target="_blank"
-                  class="btn btn-border-shadow btn-border-shadow--color2"
-                  >Qiita記事</a
-                ></span
-              >
-            </div>
-          </div>
-        </div>
-        <div class="fadein">
-          <h3>
-            <strong>
-              <span>BUBBLE TO DO</span
-              ><span><small>（HTML,CSS,JS） </small></span>
-            </strong>
-          </h3>
-        </div>
-        <div class="fadein">
-          <div class="right">
-            <div class="small">
-              既存のToDoアプリに対し，タスクの溜まり度合いがわからない，ジャンルごとの分類がしにくい，無機質で楽しくないといった不満があったので作ったものです．
-              <br />
-              デザインと使用感にこだわって，使っていてワクワクするToDoリストを目指しました．
-              <br />
-              ブラウザのリーディングリストに代わる一時的なリンク保存アプリとしても価値があると考えています．
-            </div>
-            <div class="center">
-              <a
-                href="./bubbletodo/html/index.html"
-                target="_blank"
-                class="btn btn-border-shadow btn-border-shadow--color2"
-                >使ってみる</a
-              >
-              <span></span>
-              <span></span>
-              <span
-                ><a
-                  href="https://qiita.com/kakekakemiya/items/183210b149fab49e7c11"
-                  target="_blank"
-                  class="btn btn-border-shadow btn-border-shadow--color2"
-                  >Qiita記事</a
-                ></span
-              >
-            </div>
-          </div>
-        </div>
-      </section>
+                <br />
 
-      <section id="box3" class="box" data-section-name="Co_development">
-        <div class="fadein">
-          <h2>共同開発</h2>
-          <h3>
-            <strong>
-              <span>EKICHIKA</span><span><small>（HTML,CSS,JS） </small></span>
-            </strong>
-          </h3>
-        </div>
-        <div class="fadein">
-          <div class="right">
-            <div class="small">
-              都内の鉄道は複雑すぎて使いこなせないという方に便利なサービスを作りました．
-              <br />
-              複数人での最適な（最短で集合できる）待ち合わせ場所や，小旅行先を探すのに役立つような機能がついています．
-            </div>
-            <div class="center">
-              <span
-                ><a
-                  href="./ekichika/index.html"
-                  target="_blank"
-                  class="btn btn-border-shadow btn-border-shadow--color2"
-                  >遊んでみる</a
-                ></span
-              >
-            </div>
-          </div>
-        </div>
-        <div class="fadein">
-          <h3>
-            <strong>
-              <span>新しいUndo/RedoとそのUIの提案</span
-              ><span><small>（VSCodeを改造） </small></span>
-            </strong>
-          </h3>
-        </div>
-        <div class="fadein">
-          <div class="right">
-            <div class="small">
-              通常のUndo/Redoは，「状態A→Undo→何か編集する」とすると状態Aには戻れない（履歴が消去されてしまう）というのが不満だったので，
-              一度現れた状態にはどこからでも到達できるようなUndo/Redoを木構造的に表現するとともに，
-              その木を巡回する手段として現状のUndo/Redoとも整合性がとれる簡単なUIを提案しました．
-              <br />
-              （VSCodeのコードを直接編集しました．）
-              <br />
-              なお．これについての記事はQiitaにて250件以上のLGTMをいただくことができましたので，ぜひご覧ください．
-            </div>
-            <div class="center">
-              <a
-                href="https://qiita.com/kakekakemiya/items/305123135d09f9e80a4d"
-                target="_blank"
-                class="btn btn-border-shadow btn-border-shadow--color2"
-                >Qiita記事</a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
+                kakekakemiya のページです．<br />
+                作品紹介等をしていますので是非覗いてみてください！
 
-      <section id="box4" class="box" data-section-name="Small_Works">
-        <div class="fadein">
-          <h2>プチ作品</h2>
-          <h3>
-            <strong>
-              <span>やさしいりけい</span
-              ><span><small>（HTML,CSS） </small></span>
-            </strong>
-          </h3>
-        </div>
-        <div class="fadein">
-          <div class="right">
-            <div class="small">
-              僕は塾講師のアルバイトをしているのですが，生徒に配布する用のプリントを印刷するのが面倒になったので，公開するサイトを作りました．
-              <br />
-              拙い内容ですが，COVID-19の影響でオンライン授業が展開された中でもこのサイトのおかげでプリントを配布することができました．
+                <div class="center">
+                    <span
+                        ><a
+                            href="./html/works.html"
+                            class="btn btn-border-shadow btn-border-shadow--color2"
+                            >覗いてみる</a
+                        ></span
+                    >
+                </div>
             </div>
-            <div class="center">
-              <span
-                ><a
-                  href="https://kakeru-miyazaki.github.io/yasarikei/index.html"
-                  target="_blank"
-                  class="btn btn-border-shadow btn-border-shadow--color2"
-                  >覗いてみる</a
-                ></span
-              >
-            </div>
-          </div>
         </div>
-      </section>
-      <section id="box5" class="box" data-section-name="Contact">
-        <div class="fadein">
-          <h2>Contact</h2>
-          ご連絡は
-          <a href="https://twitter.com/kakekakemiya" target="_blank">Twitter</a>
-          もしくは yasarikei@gmail.com まで
-        </div>
-      </section>
-    </main>
 
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js"></script>
-    <!-- <script src="http://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/move02/6-1/js/6-1.js"></script> -->
-    <script src="./js/main.js"></script>
-  </body>
+        <script src="./js/main.js"></script>
+    </body>
+    <footer><small>© 2021 kakekakemiya</small></footer>
 </html>
