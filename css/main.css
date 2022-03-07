@@ -1,84 +1,205 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka&family=Lora&family=Shippori+Mincho&family=Ubuntu:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fredoka&family=Kosugi+Maru&family=Lora&family=Shippori+Mincho&family=Ubuntu:wght@300&display=swap");
-nav {
-  width: 100%;
-  height: 5rem;
-  background-color: rgba(30, 99, 163, 0.363);
-  padding-top: 0.3rem;
-  box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap");
+/*========= レイアウトのためのCSS ===============*/
 
-nav ul {
-  display: flex;
-  float: right;
-}
-
-nav li {
-  list-style: none;
-}
-
-nav a {
-  display: block;
-  text-decoration: none;
-  color: #070f55;
-  margin-right: 35px;
-}
-
-nav a:hover {
-  color: #0b75a7;
-}
-
-span {
-  margin-right: 0.1rem;
+html {
+  height: auto;
+  width: auto;
 }
 
 body {
-  font-family: 'Fredoka', sans-serif;
-  font-family: 'Lora', serif;
-  font-family: 'Shippori Mincho', serif;
-  font-family: 'Ubuntu', sans-serif;
-  font-family: 'Kosugi Maru', sans-serif;
-  font-family: 'Fredoka', sans-serif;
-  font-family: 'Lora', serif;
-  font-family: 'Shippori Mincho', serif;
-  font-family: 'Ubuntu', sans-serif;
-  background: #b5eef7;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  padding-bottom: 7rem;
-  font-size: 1.2rem;
-  color: #070f55;
-  line-height: 2.2rem;
-}
-
-body span {
-  padding-right: 0.1em;
-}
-
-.TOP {
-  padding-top: 5rem;
+  font-family: "Lora", serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 h1 {
-  padding-top: 6rem;
-  text-align: center;
-  font-size: 3.2rem;
-  line-height: 4rem;
+  font-size: 6rem;
+  line-height: 10rem;
 }
 
 h2 {
+  font-size: 4rem;
+}
+h3 {
   font-size: 2.5rem;
-  line-height: 3rem;
+  /* line-height: 2rem; */
 }
 
+span {
+  margin-right: 0.5rem;
+}
+
+a {
+  color: white;
+}
+
+.box {
+  color: #fff;
+  /* padding: 40px; */
+  padding: 2rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
+  /* display: flex; */
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  font-size: 2.5rem;
+  line-height: 4.5rem;
+}
+.small {
+  font-size: 1.8rem;
+  line-height: 3rem;
+}
+.right {
+  margin-left: 1rem;
+}
 .center {
   text-align: center;
 }
 
+#box0 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  /* padding: 40px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  background: rgb(1, 118, 134);
+  color: #fff;
+  /* text-align: center; */
+}
+
+#box1 h2 {
+  color: rgb(255, 253, 153);
+}
+
+#box1 {
+  background: rgb(4, 74, 91);
+}
+#box2 {
+  background: rgb(3, 125, 166);
+}
+
+#box2 h3 {
+  color: rgb(251, 242, 160);
+}
+
+#box3 {
+  background: rgb(1, 118, 134);
+}
+
+#box3 h3 {
+  color: rgb(239, 243, 139);
+
+  /* color: rgb(255, 212, 144); */
+}
+
+#box4 {
+  background: rgb(4, 74, 91);
+}
+
+#box4 h3 {
+  color: rgb(255, 253, 153);
+}
+
+#box5 {
+  background: rgb(3, 125, 166);
+}
+
+#box5 h2 {
+  color: rgb(239, 243, 139);
+}
+
+#footer {
+  background: rgb(3, 125, 166);
+  color: #fff;
+  padding: 40px;
+  text-align: center;
+}
+
+#footer a {
+  color: #fff;
+}
+/*========= ページネーションCSS ===============*/
+
+.pagination {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1em;
+  z-index: 10;
+  list-style: none;
+}
+
+.pagination a {
+  display: block;
+  height: 20px;
+  margin-bottom: 5px;
+  color: #fff;
+  position: relative;
+  padding: 4px;
+}
+
+.pagination a.active:after {
+  box-shadow: inset 0 0 0 5px;
+}
+
+/*現在地表示のテキストの設定*/
+.pagination a .hover-text {
+  font-size: 2rem;
+  position: absolute;
+  right: 15px;
+  top: 0;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+  padding-right: 15px;
+}
+
+.pagination a:hover .hover-text {
+  opacity: 1;
+}
+
+.pagination a:after {
+  -webkit-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+  width: 10px;
+  height: 10px;
+  display: block;
+  border: 1px solid;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 3px;
+  bottom: 0;
+}
+
+/*768px以下は現在地表示のテキストを非表示*/
+/* @media screen and (max-width: 768px) {
+  .pagination a .hover-text {
+    display: none;
+  }
+} */
+
+/* 画面外にいる状態 */
+.fadein {
+  opacity: 0.1;
+  transform: translate(20px, 50px);
+  transition: all 900ms;
+}
+
+/* 画面内に入った状態 */
+.fadein.scrollin {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
 /* button */
+
 *,
 *:before,
 *:after {
@@ -90,8 +211,6 @@ h2 {
 a.btn,
 button.btn {
   margin-top: 2rem;
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
   font-size: 1.6rem;
   font-weight: 700;
   line-height: 1.5;
@@ -109,12 +228,13 @@ button.btn {
   vertical-align: middle;
   text-decoration: none;
   letter-spacing: 0.1em;
-  color: #073870;
+  color: #ffffff;
   border-radius: 0.5rem;
 }
 
 a.btn-border-shadow {
   padding: calc(1.5rem - 12px) 3rem 1.5rem;
+
   background: rgba(255, 255, 255, 0);
 }
 
@@ -122,12 +242,15 @@ a.btn-border-shadow:before {
   position: absolute;
   top: -6px;
   left: -6px;
+
   width: 100%;
   height: 100%;
-  content: '';
+
+  content: "";
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  border: 3px solid #073870;
+
+  border: 3px solid rgb(255, 255, 255);
   border-radius: 0.5rem;
 }
 
@@ -146,24 +269,6 @@ a.btn-border-shadow--color2 {
 
 a.btn-border-shadow--color2:before {
   border-radius: 100vh;
-  -webkit-box-shadow: 3px 3px 0 #073870;
+  -webkit-box-shadow: 3px 3px 0 #fffffff8;
   box-shadow: 3px 3px 0 #ffffff00;
-}
-
-footer {
-  margin-top: 2rem;
-  padding-top: 1.6rem;
-  font-size: 1.3rem;
-  background-color: rgba(255, 255, 255, 0.685);
-  width: 100%;
-  height: 3rem;
-  text-align: center;
-  position: absolute;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-}
-
-.right {
-  text-align: right;
 }
