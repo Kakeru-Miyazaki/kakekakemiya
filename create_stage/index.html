@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/common.min.css" />
+    </head>
+    <body>
+        <h1>EEIC Programming 教室</h1>
+        <div>現在の選択 : <span id="what_you_have">grass</span></div>
+        <canvas
+            id="canvas"
+            width="640"
+            height="480"
+            style="border: 1px solid"
+        ></canvas>
+        <br />
+        <input
+            type="button"
+            class="mode_change_button"
+            value="草"
+            onclick="select_layer('grass')"
+        />
+        <input
+            type="button"
+            class="mode_change_button"
+            value="道"
+            onclick="select_layer('movable')"
+        />
+        <input
+            type="button"
+            class="mode_change_button"
+            value="ゴール"
+            onclick="select_layer('goal')"
+        />
+        <input
+            type="button"
+            class="mode_change_button"
+            value="岩"
+            onclick="select_layer('rock')"
+        />
+
+        <script>
+            // global var
+            var field_type = "grass";
+
+            // constant var
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            const gridsize = 32;
+            const WIDTH = 20;
+            const HEIGHT = 15;
+            const layer_info = {
+                grass: 33,
+                movable: 34,
+                goal: 223,
+                rock: 52,
+            };
+
+            // draw_img(int dx, int dy, string field_type)
+            // YOU DON'T HAVE TO MULTIPLY 32 (dx, dy is just grid number 0-9)
+            function draw_img(dx, dy, field_type) {
+                var image = new Image();
+                image.src = "./image/tilesets-big.png";
+
+                function calc_pos_from_layer_index(index) {
+                    return [(index - 1) % 8, Math.floor((index - 1) / 8)];
+                }
+
+                image.onload = function () {
+                    ctx.drawImage(
+                        image,
+                        calc_pos_from_layer_index(layer_info[field_type])[0] *
+                            gridsize,
+                        calc_pos_from_layer_index(layer_info[field_type])[1] *
+                            gridsize,
+                        gridsize,
+                        gridsize,
+                        dx * gridsize,
+                        dy * gridsize,
+                        gridsize,
+                        gridsize
+                    );
+                };
+            }
+
+            ctx.strokeStyle = "#ff0000";
+            ctx.lineWidth = 8;
+
+            // initialize
+            const initialize = function () {
+                for (let w = 0; w < WIDTH; w++) {
+                    for (let h = 0; h < HEIGHT; h++) {
+                        draw_img(w, h, "grass");
+                    }
+                }
+            };
+            initialize();
+
+            function select_layer(selected_field_type) {
+                // console.log(field_type);
+                field_type = selected_field_type;
+                document.getElementById("what_you_have").innerHTML =
+                    selected_field_type;
+            }
+
+            // onClick canvas
+            // draw the items then selected (field_type)
+            function onClick(e) {
+                var rect = e.target.getBoundingClientRect();
+                let x = e.clientX - rect.left;
+                let y = e.clientY - rect.top;
+
+                console.log(x, y);
+                console.log(field_type);
+                // draw_img(0, 2, "rock");
+                draw_img(Math.floor(x / 32), Math.floor(y / 32), field_type);
+            }
+            canvas.addEventListener("click", onClick, false);
+            // draw_img(0, 0, "field");
+            // draw_img(1, 1, "movable");
+            // draw_img(1, 2, "goal");
+            // draw_img(0, 0, "goal");
+            // draw_img(1, 3, "rock");
+            // draw_img(1, 3, "field");
+        </script>
+    </body>
+</html>
