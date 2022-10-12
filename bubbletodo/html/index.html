@@ -478,7 +478,8 @@
             window.open(d.url, "_blank").focus();
           }
         } else {
-          appendChildrenBubble(d);
+          // appendChildrenBubble(d);
+          deleteBubble(d);
         }
       })
       .attr("fill", "white")
