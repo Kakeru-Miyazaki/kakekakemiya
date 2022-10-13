@@ -18,7 +18,9 @@
   <div id="mask" class="hidden" onclick="exit()"></div>
   <section id="modal1" class="hidden modal">
     <p>
-    <div><strong class="center">Add Section</strong></div>
+    <div>
+      <span class="center">消したいモヤモヤを書いてください</span>
+    </div>
     <br />
     <input type="text" id="inputParentName" />
     <br />
@@ -384,7 +386,7 @@
     svg
       .append("text")
       .attr("id", "title")
-      .text("BUBBLE TO DO")
+      // .text("あなたのお悩みを解決")
       .attr("x", width / 2)
       .attr("y", height / 2)
       .attr("font-size", 80)
@@ -396,7 +398,7 @@
 
     var color_scale = d3
       .scaleLinear()
-      .domain([-2, max_lenchildren])
+      .domain([-2, 10])
       .range([colorlist[colortheme]["min"], colorlist[colortheme]["max"]]);
 
     var link = svg
@@ -416,12 +418,15 @@
       .attr("class", "node_group")
       .append("circle")
       .attr("r", function (d) {
-        return d.r;
+        // return d.r;
+        return Math.random() * 50 + 80;
       })
       .attr("fill", function (d) {
         if (d.parent_name == null) {
-          return color_scale(lenChildren[d.name]);
+          // return color_scale(lenChildren[d.name]);
+          return color_scale(Math.random() * 9 + 1)
         } else {
+          // return color_scale(Math.random() * 10)
           return color_scale(lenChildren[d.parent_name] - 2);
         }
       })
@@ -493,38 +498,38 @@
         return d.y;
       })
       .attr("text-anchor", "middle");
-    var deleteButton = svg
-      .selectAll(".node_group")
-      .append("text")
-      .attr("font-size", function (d) {
-        if (d.parent_name == null) {
-          return 35;
-        } else {
-          return 20;
-        }
-      })
-      .call(
-        d3
-          .drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended)
-      )
-      .on("click", function (d) {
-        deleteBubble(d);
-      })
-      .attr("fill", "white")
-      .text(function (d) {
-        return "×";
-      })
-      .attr("x", function (d) {
-        return d.x;
-      })
-      .attr("y", function (d) {
-        return d.y;
-      })
-      .attr("opacity", 0.4)
-      .attr("text-anchor", "middle");
+    // var deleteButton = svg
+    //   .selectAll(".node_group")
+    //   .append("text")
+    //   .attr("font-size", function (d) {
+    //     if (d.parent_name == null) {
+    //       return 35;
+    //     } else {
+    //       return 20;
+    //     }
+    //   })
+    //   .call(
+    //     d3
+    //       .drag()
+    //       .on("start", dragstarted)
+    //       .on("drag", dragged)
+    //       .on("end", dragended)
+    //   )
+    //   .on("click", function (d) {
+    //     deleteBubble(d);
+    //   })
+    //   .attr("fill", "white")
+    //   .text(function (d) {
+    //     return "×";
+    //   })
+    //   .attr("x", function (d) {
+    //     return d.x;
+    //   })
+    //   .attr("y", function (d) {
+    //     return d.y;
+    //   })
+    //   .attr("opacity", 0.4)
+    //   .attr("text-anchor", "middle");
 
     var simulation = d3
       .forceSimulation()
@@ -538,7 +543,7 @@
           .id(function (d) {
             return d.name;
           })
-          .strength(0.3)
+          .strength(0.1)
           .iterations(16)
       )
       .force(
@@ -556,14 +561,14 @@
         "x",
         d3
           .forceX()
-          .strength(0.03)
+          .strength(0.007)
           .x(width / 2)
       )
       .force(
         "y",
         d3
           .forceY()
-          .strength(0.03)
+          .strength(0.007)
           .y(height / 2)
       );
     simulation.nodes(nodesData).on("tick", ticked);
@@ -604,13 +609,13 @@
         .attr("y", function (d) {
           return d.y;
         });
-      deleteButton
-        .attr("x", function (d) {
-          return d.x + d.r / 1.414;
-        })
-        .attr("y", function (d) {
-          return d.y - d.r / 2.828;
-        });
+      // deleteButton
+      //   .attr("x", function (d) {
+      //     return d.x + d.r / 1.414;
+      //   })
+      //   .attr("y", function (d) {
+      //     return d.y - d.r / 2.828;
+      //   });
     }
 
     // drag events
