@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300&display=swap");
+html {
+  font-family: "Lora", serif;
+  font-family: "Ubuntu", sans-serif;
+}
+#undoicon {
+  position: absolute;
+  left: 25px;
+  top: 30px;
+}
+#redoicon {
+  position: absolute;
+  left: 80px;
+  top: 30px;
+}
+
+#colorTheme {
+  position: absolute;
+  text-align: right;
+  right: 15px;
+  top: 25px;
+}
+
+body {
+  height: auto;
+  width: auto;
+  /* background-color: "red"; */
+}

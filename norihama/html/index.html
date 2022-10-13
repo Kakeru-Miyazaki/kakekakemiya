@@ -442,9 +442,9 @@
             window.open(d.url, "_blank").focus();
           }
         } else {
-          appendChildrenBubble(d);
+          // appendChildrenBubble(d);
           // edit here
-          // deleteBubble(d);
+          deleteBubble(d);
         }
       })
       .attr("opacity", function (d) {
@@ -478,8 +478,8 @@
             window.open(d.url, "_blank").focus();
           }
         } else {
-          appendChildrenBubble(d);
-          // deleteBubble(d);
+          // appendChildrenBubble(d);
+          deleteBubble(d);
         }
       })
       .attr("fill", "white")
