@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "target": "ESNext", //変換後の形式
+        "module": "CommonJS", //モジュールの呼び出し方
+        "noImplicitAny": true,
+        "strict": true,
+        "esModuleInterop": true //型定義がないものを勝手にanyにしない
+    }
+}

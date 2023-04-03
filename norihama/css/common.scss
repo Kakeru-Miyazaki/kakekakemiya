@@ -1,0 +1,51 @@
+$bgColor: rgb(0, 0, 0);
+
+body {
+    background-color: $bgColor;
+    overflow: hidden;
+    padding: 0;
+
+    background: url("https://storage.googleapis.com/stress-explosion-images/016582cf0d94ec309eb1bfae7446aaa4be62b6fa0fca4ec47cf572b0646cc321/02-03-12-52.png");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.container {
+    opacity: 0;
+    display: flex;
+    background-color: $bgColor;
+    justify-content: center;
+    align-items: center;
+    width: 48vmin;
+    height: 48vmin;
+
+    .explosionVideo {
+        position: relative;
+    }
+}
+
+.wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    background-color: $bgColor;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $bgColor;
+    // clip-path: circle(15vmin at 50% 50%);
+
+    -webkit-clip-path: polygon(28% 5%, 40% 31%, 51% 17%, 58% 26%, 65% 11%, 68% 25%, 81% 22%, 74% 34%, 98% 40%, 78% 46%, 87% 54%, 74% 58%, 79% 69%, 71% 69%, 68% 86%, 59% 74%, 58% 97%, 50% 76%, 38% 88%, 32% 76%, 16% 87%, 20% 69%, 4% 67%, 14% 53%, 1% 39%, 17% 39%, 10% 24%, 28% 29%);
+    clip-path: polygon(28% 5%, 40% 31%, 51% 17%, 58% 26%, 65% 11%, 68% 25%, 81% 22%, 74% 34%, 98% 40%, 78% 46%, 87% 54%, 74% 58%, 79% 69%, 71% 69%, 68% 86%, 59% 74%, 58% 97%, 50% 76%, 38% 88%, 32% 76%, 16% 87%, 20% 69%, 4% 67%, 14% 53%, 1% 39%, 17% 39%, 10% 24%, 28% 29%);
+
+    // -webkit-clip-path: polygon(76% 2%, 78% 12%, 89% 12%, 87% 20%, 98% 26%, 88% 35%, 94% 45%, 85% 53%, 90% 63%, 80% 69%, 92% 77%, 82% 82%, 86% 92%, 74% 89%, 65% 96%, 54% 88%, 44% 95%, 37% 84%, 30% 92%, 24% 85%, 12% 87%, 16% 75%, 5% 71%, 15% 60%, 4% 56%, 18% 48%, 9% 42%, 21% 33%, 13% 20%, 29% 21%, 33% 7%, 50% 12%, 59% 4%, 68% 9%);
+    // clip-path: polygon(76% 2%, 78% 12%, 89% 12%, 87% 20%, 98% 26%, 88% 35%, 94% 45%, 85% 53%, 90% 63%, 80% 69%, 92% 77%, 82% 82%, 86% 92%, 74% 89%, 65% 96%, 54% 88%, 44% 95%, 37% 84%, 30% 92%, 24% 85%, 12% 87%, 16% 75%, 5% 71%, 15% 60%, 4% 56%, 18% 48%, 9% 42%, 21% 33%, 13% 20%, 29% 21%, 33% 7%, 50% 12%, 59% 4%, 68% 9%);
+    background-color: rgba(229, 200, 0, 0.2);
+}
+
+.wrapperShadow {
+    filter: drop-shadow(0px 0px 40px rgba(229, 200, 11, 1));
+    filter: blur(1.8px)
+}
