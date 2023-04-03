@@ -1,6 +1,4 @@
-const getRandom = (size = 5) => (Math.random() * 2 - 1) * size;
-
-const indexKeyList = [...Array(7)].map((_, index) => index);
+import { getRandom, incrementCounter, indexKeyList } from "./global";
 
 const playVideoOnClick = (index: number) => {
     const explosionVideo = document.getElementById(
@@ -15,13 +13,14 @@ const playVideoOnClick = (index: number) => {
         return;
     }
 
-    wrapper.addEventListener("click", () => {
+    wrapper.addEventListener("click", async () => {
         const videoLength = 4000;
 
         container.style.opacity = "1";
         explosionVideo.play();
-        setTimeout(() => {
+        setTimeout(async () => {
             // hide explosion video
+            await incrementCounter();
             explosionVideo.style.display = "none";
         }, videoLength);
     });
@@ -41,7 +40,7 @@ const setPositionOfVideos = () => {
         { x: getRandom() + 75 - xMargin, y: getRandom() + 16.5 + yMargin },
 
         { x: getRandom() + 22.5, y: getRandom() + 45 },
-        { x: getRandom() + 50, y: getRandom() + 45 },
+        { x: getRandom() + 50, y: getRandom() + 50 },
         { x: getRandom() + 77.5, y: getRandom() + 45 },
 
         { x: getRandom() + 25 + xMargin, y: getRandom() + 79.5 - yMargin },
